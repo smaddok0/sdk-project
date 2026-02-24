@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>learn js</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='daftar/daftar.css')}}">
+    </head>
+    <body>
+        <div id="nav">
+            <a href="/"><div class="navbar" id="n1"><h>home</h></div></a>
+            <a href="/user/daftar"><div class="navbar" id="n2"><h>daftar</h></div></a>
+            <a href="/user/login"><div class="navbar" id="n3"><h>login</h></div></a>
+        </div>
+        <div id="daftar">
+            <h1 id="h_daftar">daftar dulu</h1>
+            <form id="data_daftar" action="/data_daftar" method="POST">
+                <label for="nama"></label>
+                <div id="input1">
+                    <input
+                    type="text"
+                    id="nama"
+                    name='nama'
+                    placeholder="masukkan nama">
+                </div>
+                <label for="password"></label>
+                <div id="input2">
+                    <input
+                    type="text"
+                    id="password"
+                    name='password'
+                    placeholder="masukkan password">
+                </div>
+                <div id="submit_box">
+                    <input type="submit" id="submit" value="simpan">
+                </div>
+            </form>
+        </div>
+        <script src="{{url_for('static', filename='daftar/daftar.js')}}"></script>
+    </body>
+</html>

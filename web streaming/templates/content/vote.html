@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>learn js</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='vote/vote.css')}}">
+    </head>
+    <body>
+        <div id="nav">
+            <a href="/"><div class="navbar" id="n1"><h>home</h></div></a>
+            <a href="/user/daftar"><div class="navbar" id="n2"><h>daftar</h></div></a>
+            <a href="/user/login"><div class="navbar" id="n3"><h>login</h></div></a>
+        </div>
+        <div>
+            <h1 id="ask">mana yang lebih bagus</h1>
+        </div>
+        <div>
+            <div id="div1">
+                <div  class="div-h">
+                    <h1 class="h-1" id="h1">-</h1>
+                </div>
+                <div class="div-h">
+                    <h1 class="h-1" id="h2">-</h1>
+                </div>
+                <div class="div-h">
+                    <h1 class="h-1" id="h3">-</h1>
+                </div>
+            </div>
+            <div id="div2">
+                <div class="div-1">
+                    <img class="img1" src="{{url_for('static', filename='vote/media vote/1.png')}}">
+                </div>
+                <div class="div-1">
+                    <img class="img1" src="{{url_for('static', filename='vote/media vote/2.jpg')}}">
+                </div>
+                <div class="div-1">
+                    <img class="img1" src="{{url_for('static', filename='vote/media vote/3.png')}}">
+                </div>
+            </div>
+            <div id="div3">
+                <button onclick="btn_1()" class='btn-1' id="btn1">vote</button>
+                <button onclick="btn_2()" class='btn-1' id="btn2">vote</button>
+                <button onclick="btn_3()" class='btn-1' id="btn3">vote</button>
+            </div>
+        </div>
+        <script src="{{url_for('static', filename='vote/vote.js')}}"></script>
+    </body>
+</html>
