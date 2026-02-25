@@ -32,4 +32,3 @@ def vote():
 def streaming():
     return render_template('content/streaming.html')
 
-app.run(debug=True)
