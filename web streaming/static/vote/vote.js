@@ -3,22 +3,27 @@ let h1 = 0
 let h2 = 0
 let h3 = 0
 function btn_1() {
-    h1 += 1
-    document.getElementById("h1").innerText = h1
-    // if(h1 == 10){
-    //     alert('udah oiiiiii')
-    // }
+    fetch('/content/vote/add1')
+        .then(res => res.json())
+        .then(vote1)
 }
+
+function vote1(vote){
+    document.querySelector("#h_1").innerText = vote
+    console.log(vote)
+}
+
+
 function btn_2() {
     h2 += 1
-    document.getElementById("h2").innerText = h2
+    document.getElementById("h_2").innerText = h2
     // if(h2 == 10){
     //     alert('udah oiiiiii')
     // }
 }
 function btn_3() {
     h3 += 1
-    document.getElementById("h3").innerText = h3
+    document.getElementById("h_3").innerText = h3
     // if(h3 == 10){
     //     alert('udah oiiiiii')
     // }
