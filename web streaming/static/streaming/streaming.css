@@ -18,7 +18,7 @@ body {
     width: 100%;
     height: 7vh;
     position: fixed;
-    z-index: 0;
+    z-index: 5;
 }
 .navbar{
     position: absolute;
@@ -149,4 +149,17 @@ body {
 .btn-1:active{
     background-image: linear-gradient(to right, #ff0000de, #0026ff);
     opacity: 100%;
+}
+
+.div_str{
+    background-color: rgba(0, 255, 255, 0.387);
+    position: relative;
+    width:fit-content;
+    height:fit-content;
+}
+#i1{
+    position: absolute;
+    width: 50vw;
+    height: 35vw;
+    border-radius: 10px;
 }
