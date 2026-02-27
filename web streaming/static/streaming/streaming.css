@@ -2,7 +2,7 @@ body {
     font-family:'Comic Sans MS','Comic Sans',cursive;
     padding: 0;
     margin: 0;
-    width: 100vw;
+    width: 100%;
     height:100%;
     position:absolute;
     /* background-color: rgb(255, 0, 0); */
@@ -19,6 +19,7 @@ body {
     height: 7vh;
     position: fixed;
     z-index: 5;
+    transition: top 0.3 ease;
 }
 .navbar{
     position: absolute;
@@ -154,12 +155,97 @@ body {
 .div_str{
     background-color: rgba(0, 255, 255, 0.387);
     position: relative;
+    top: 8vh;
+    left: 1vw;
     width:fit-content;
     height:fit-content;
 }
 #i1{
     position: absolute;
     width: 50vw;
-    height: 35vw;
+    height: 28vw;
     border-radius: 10px;
+}
+
+#des{
+    position:relative;
+    background-color: rgba(24, 24, 24, 0.841);
+    width: 50vw;
+    height: 50vh;
+    border-radius: 10px;
+    left: 1vw;
+    top: 65vh;
+    z-index:-2;
+}
+#judul{
+    position: relative;
+    color:rgb(196, 196, 196);
+    font-size: 1.6rem;
+    top:5px;
+    left: 15px;
+
+}
+
+#core{
+    /* background-color: aqua; */
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
+#cmd_b{
+    background-color:rgba(24, 24, 24, 0.841) ;
+    position: relative;
+    right: 1vw;
+    top:8vh;
+    border-radius:10px;
+    height:210vh;
+    width:46vw;
+}
+
+#inp{
+    background-color: rgba(5, 5, 5, 0.841);
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+}
+#type{
+    position: absolute;
+    top: 9px;
+    height: 30px;
+    width:300px;
+    left: 20px;
+    border:none;
+    border-radius: 15px;
+    
+}
+#type,textarea{
+    color:rgb(196, 196, 196);
+    font-family:'Comic Sans MS','Comic Sans',cursive;
+    padding-left: 8px;
+    background-color: rgba(24, 24, 24, 0.841);
+}
+
+#type::placeholder{
+    position:relative;
+    font-family:'Comic Sans MS','Comic Sans',cursive;
+}
+
+#kirim{
+    color:white;
+    background-color: rgba(0, 220, 220, 0.676);
+    position: relative;
+    top: 9px;
+    height: 30px;
+    width:30px;
+    left: 340px;
+    border:none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#kirim:hover{
+    background-color:rgb(0, 218, 218);
 }
