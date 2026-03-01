@@ -42,10 +42,19 @@ test_vote = "SELECT * FROM vote"
 #     nama = request.form.get('nama')
 #     password = request.form.get('password')
 #     return render_template('daftar.html',nama=nama,password=password)
-
-
+# ------------vote1------------
+@app.route('/content/vote/preview1')
+def addVote_p1():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote1 FROM vote")
+            votedb = cs.fetchone()[0]
+            return jsonify(votedb)
+    
 @app.route('/content/vote/add1')
-def addVote():
+def addVote1():
     db_link = os.getenv('db_link')
     # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
     with psycopg2.connect(db_link)as db :
@@ -55,7 +64,60 @@ def addVote():
             votedb += 1
             cs.execute("UPDATE vote SET vote1=%s WHERE id=%s",(votedb,1))
             db.commit()
+            return jsonify(votedb)
+
+
+# --------------------vote2---------------
+@app.route('/content/vote/preview2')
+def addVote_p2():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote2 FROM vote")
+            votedb = cs.fetchone()[0]
+            return jsonify(votedb)
+    
+@app.route('/content/vote/add2')
+def addVote2():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote2 FROM vote")
+            votedb = cs.fetchone()[0]
+            votedb += 1
+            cs.execute("UPDATE vote SET vote2=%s WHERE id=%s",(votedb,1))
+            db.commit()
         return jsonify(votedb)
+
+
+# -----------------------vote3-----------------
+@app.route('/content/vote/preview3')
+def addVote_p3():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote3 FROM vote")
+            votedb = cs.fetchone()[0]
+            return jsonify(votedb)
+    
+@app.route('/content/vote/add3')
+def addVote3():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote3 FROM vote")
+            votedb = cs.fetchone()[0]
+            votedb += 1
+            cs.execute("UPDATE vote SET vote3=%s WHERE id=%s",(votedb,1))
+            db.commit()
+            return jsonify(votedb)
+
+
+
 #------------------halaman---------------------
 @app.route("/")
 def utama():
