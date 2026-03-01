@@ -1,16 +1,27 @@
 from flask import Flask,render_template,request,session,jsonify
-import mysql.connector
-
+import psycopg2,os
 app = Flask(__name__)
 
-db = mysql.connector.connect(
-    user = 'freedb_smaddok',
-    password = 'T#Ff9CR4fuHFGBM',
-    host = 'sql.freedb.tech',
-    database = 'freedb_sdk_db',
-    port ='3306'
-)
+db_link = os.getenv('db_link')
+db = psycopg2.connect(db_link)
+# db = psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")
 cs = db.cursor()
+
+dfl_vote = "UPDATE vote SET vote1=0, vote2=0 , vote3=0"
+test_vote = "SELECT * FROM vote"
+# cs.execute(test_vote)
+# db.commit()
+# print(cs.fetchall())
+
+# import mysql.connector
+# db = mysql.connector.connect(
+#     user = 'freedb_smaddok',
+#     password = 'T#Ff9CR4fuHFGBM',
+#     host = 'sql.freedb.tech',
+#     database = 'freedb_sdk_db',
+#     port ='3306'
+# )
+# cs = db.cursor()
 
 # cs.execute("ALTER TABLE vote ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY")
 # db.commit()
