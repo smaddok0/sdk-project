@@ -2,10 +2,10 @@ from flask import Flask,render_template,request,session,jsonify
 import psycopg2,os
 app = Flask(__name__)
 
-db_link = os.getenv('db_link')
-db = psycopg2.connect(db_link)
+# db_link = os.getenv('db_link')
+# db = psycopg2.connect(db_link)
 # db = psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")
-cs = db.cursor()
+# cs = db.cursor()
 
 dfl_vote = "UPDATE vote SET vote1=0, vote2=0 , vote3=0"
 test_vote = "SELECT * FROM vote"
@@ -46,12 +46,16 @@ test_vote = "SELECT * FROM vote"
 
 @app.route('/content/vote/add1')
 def addVote():
-    cs.execute("SELECT vote1 FROM vote")
-    votedb = cs.fetchone()[0]
-    votedb += 1
-    cs.execute("UPDATE vote SET vote1=%s WHERE id=%s",(votedb,1))
-    db.commit()
-    return jsonify(votedb)
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            cs.execute("SELECT vote1 FROM vote")
+            votedb = cs.fetchone()[0]
+            votedb += 1
+            cs.execute("UPDATE vote SET vote1=%s WHERE id=%s",(votedb,1))
+            db.commit()
+        return jsonify(votedb)
 #------------------halaman---------------------
 @app.route("/")
 def utama():
@@ -74,5 +78,5 @@ def streaming():
     return render_template('content/streaming.html')
 
 # app.run(debug=True)
-cs.close()
-db.close()
+# cs.close()
+# db.close()
