@@ -21,7 +21,8 @@ cs = db.cursor()
 # cs.execute("UPDATE vote SET vote1 = %s", (0,))
 # db.commit()
 # cs.execute("SELECT * FROM vote")
-# for x in cs:
+# ax = cs.fetchall()
+# for x in ax:
 #     print(x)
 
 
