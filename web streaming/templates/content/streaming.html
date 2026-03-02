@@ -8,8 +8,13 @@
     <body>
         <div id="nav">
             <a href="/"><div class="navbar" id="n1"><h>home</h></div></a>
-            <a href="/user/daftar"><div class="navbar" id="n2"><h>daftar</h></div></a>
-            <a href="/user/login"><div class="navbar" id="n3"><h>login</h></div></a>
+            {% if 'user' not in session %}
+                <a href="/user/daftar"><div class="navbar" id="n2"><h>daftar</h></div></a>
+                <a href="/user/login"><div class="navbar" id="n3"><h>login</h></div></a>
+            {% else %}
+                <div class="navbar" id="n2" style="background-color: transparent;"><h>{{session['user']}}</h></div>
+                <a href="/user/logout/submit"><div class="navbar" id="n3"><h>logout</h></div></a>
+            {% endif %}
         </div>
         <div class="div_str">
             <iframe id='i1'src="https://drive.google.com/file/d/1oou2lSI94SR_OQ3lgNvZM1cEBBwmwaTz/preview" allowfullscreen frameborder="0" allow="accelerometer; autoplay; gyroscope"></iframe>
@@ -23,10 +28,8 @@
                     <input id ='type' type="text" placeholder="komen.....">
                     <button id="kirim" type="submit">▶</button>
                 </div>
-                <div id="cmd"></div>
             </div>
         </div>
         <script src="{{url_for('static', filename='streaming/streaming.js')}}"></script>
     </body>
-
 </html>
