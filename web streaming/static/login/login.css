@@ -60,7 +60,7 @@ body {
     margin-top:20vh;
     border-radius: 40px;
     justify-self: center;
-    position: relative;
+    position: absolute;
     box-shadow:4px 4px 10px -2px rgba(255, 255, 255, 0.566); 
 }
 
@@ -69,7 +69,7 @@ body {
     /* background-color: rgba(0, 255, 255, 0.648); */
     color: rgb(255, 255, 255);
     justify-self: center;
-    padding-top:35px;
+    padding-top:10px;
     font-size: 2rem;
 }
 
