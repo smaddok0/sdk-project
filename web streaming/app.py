@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,session,jsonify,redirect,url_for
 import psycopg2,os
 app = Flask(__name__)
+app.secret_key = '*smaddok'
 
 # db_link = os.getenv('db_link')
 # db = psycopg2.connect(db_link)
@@ -115,8 +116,9 @@ def addVote3():
             votedb += 1
             cs.execute("UPDATE vote SET vote3=%s WHERE id=%s",(votedb,1))
             db.commit()
-            return jsonify(votedb)
+        return jsonify(votedb)
 
+#--------------------login--------------------
 @app.route('/user/daftar/submit', methods=['POST'])
 def input_daftar():
     db_link = os.getenv('db_link')
@@ -140,6 +142,38 @@ def input_daftar():
                     db.commit()
                     return jsonify({"redirect":'/user/login'})
     
+@app.route('/user/login/submit', methods=['POST'])
+def input_login():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            data = request.json
+            nama = data.get('user')
+            password = data.get('password')
+
+            cs.execute('SELECT * FROM users WHERE nama = %s',(nama,))
+            terdaftar = cs.fetchone()
+            if terdaftar and not None:
+                if password == terdaftar[1]:
+                    session['user'] = terdaftar[0]
+                    return jsonify({'ada':'ada'})
+                else:
+                    return jsonify({'salah':'password salah'})
+            else:
+                return jsonify({'belum':'belum terdaftar'})
+               
+@app.route('/user/logout/submit')
+def input_logout():
+    session.clear()
+    return redirect('/')
+
+#------------------komen--------------------
+@app.route('/streaming/komen', methods=['POST'])
+def komen():
+    data = request.json
+    cmd = data['komen']
+    return jsonify(cmd)
 
 
 #------------------halaman---------------------
