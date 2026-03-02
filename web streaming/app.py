@@ -1,17 +1,18 @@
-from flask import Flask,render_template,request,session,jsonify
+from flask import Flask,render_template,request,session,jsonify,redirect,url_for
 import psycopg2,os
 app = Flask(__name__)
 
 # db_link = os.getenv('db_link')
 # db = psycopg2.connect(db_link)
-# db = psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")
-# cs = db.cursor()
-
-dfl_vote = "UPDATE vote SET vote1=0, vote2=0 , vote3=0"
-test_vote = "SELECT * FROM vote"
-# cs.execute(test_vote)
-# db.commit()
-# print(cs.fetchall())
+db = psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")
+cs = db.cursor()
+def vote_default():
+    dfl_vote = "UPDATE vote SET vote1=0, vote2=0 , vote3=0"
+    test_vote = "SELECT * FROM vote"
+    cs.execute(dfl_vote)
+    db.commit()
+    cs.execute(test_vote)
+    print(cs.fetchall())
 
 # import mysql.connector
 # db = mysql.connector.connect(
@@ -116,6 +117,29 @@ def addVote3():
             db.commit()
             return jsonify(votedb)
 
+@app.route('/user/daftar/submit', methods=['POST'])
+def input_daftar():
+    db_link = os.getenv('db_link')
+    # with psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")as db :
+    with psycopg2.connect(db_link)as db :
+        with db.cursor()as cs:
+            data = request.json
+            nama = data.get('user')
+            password = data.get('password')
+
+            cs.execute("SELECT 1 FROM users WHERE nama = %s",(nama,))
+            current = cs.fetchone()
+
+            if current:
+                return jsonify({"ada":'coba nama lain'})
+            else:
+                if password == "":
+                    return jsonify({"pass":'masukkan password'})
+                else:
+                    cs.execute("INSERT INTO users (nama,password) VALUES(%s,%s)",(nama,password))
+                    db.commit()
+                    return jsonify({"redirect":'/user/login'})
+    
 
 
 #------------------halaman---------------------
@@ -142,3 +166,9 @@ def streaming():
 # app.run(debug=True)
 # cs.close()
 # db.close()
+
+
+
+# cs.execute("UPDATE users SET nama=%s,password=%s",())
+# cs.execute("SELECT * FROM users")
+# print(cs.fetchall())
