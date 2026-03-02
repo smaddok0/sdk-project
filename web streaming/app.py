@@ -133,7 +133,7 @@ def input_daftar():
             current = cs.fetchone()
 
             if current:
-                return jsonify({"ada":'coba nama lain'})
+                return jsonify({"ada":'nama sudah dipakai'})
             else:
                 if password == "":
                     return jsonify({"pass":'masukkan password'})
@@ -205,4 +205,5 @@ def streaming():
 
 # cs.execute("UPDATE users SET nama=%s,password=%s",())
 # cs.execute("SELECT * FROM users")
+
 # print(cs.fetchall())
