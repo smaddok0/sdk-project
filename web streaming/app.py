@@ -3,8 +3,6 @@ import psycopg2,os
 app = Flask(__name__)
 app.secret_key = '*smaddok'
 
-app.run(host="0.0.0", port=int(os.environ.get("PORT", 8080)))
-
 # db_link = os.getenv('db_link')
 # db = psycopg2.connect(db_link)
 db = psycopg2.connect("postgresql://neondb_owner:npg_7pAzTFnJLRE0@ep-frosty-queen-akblv49h-pooler.c-3.us-west-2.aws.neon.tech/sdk_db?sslmode=require&channel_binding=require")
